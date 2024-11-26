@@ -11,7 +11,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Oscurece con un negro semitransparente */
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
@@ -65,5 +65,5 @@
 
 #buscar-btn:hover {
   animation: bounce;
-  animation-duration: 0.5;
+  animation-duration: 1s;
 }

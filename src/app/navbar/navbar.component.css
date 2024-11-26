@@ -1,0 +1,65 @@
+/* Header base */
+.navbar {
+  background-color: #f15b2a; /* Color de fondo similar al ejemplo */
+  color: white;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu ul li {
+  margin: 0 15px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu ul li a:hover {
+  color: #000000; /* Color amarillo dorado al pasar el mouse */
+}
+
+/* Íconos de redes sociales */
+.social-icons {
+  display: flex;
+}
+
+.social-icons .icon {
+  margin-left: 10px;
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.social-icons .icon:hover {
+  color: #000000; /* Color amarillo dorado al pasar el mouse */
+}
