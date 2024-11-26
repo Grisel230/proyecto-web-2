@@ -63,6 +63,11 @@
   background: linear-gradient(90deg, #ff5722, #ff9800);
 }
 
+#buscar-btn {
+  color: white;
+  background: #ff5722;
+}
+
 #buscar-btn:hover {
   animation: bounce;
   animation-duration: 1s;
