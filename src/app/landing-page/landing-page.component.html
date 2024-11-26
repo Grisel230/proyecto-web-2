@@ -1,16 +1,27 @@
 <div class="landing-page">
 
-  <div class="hero-section text-center text-light d-flex align-items-center justify-content-center"
-       style="background-image: url('assets/hero.jpg'); height: 100vh; background-size: cover; background-position: center;">
+  <div
+    class="hero-section text-center text-light d-flex align-items-center justify-content-center"
+    style="background-image: url('assets/hero.jpg'); height: 100vh; background-size: cover; background-position: center;">
     <div class="hero-content">
-      <h1 class="animate__animated animate__rubberBand">Descubramos el Mundo Juntos</h1>
-      <p>¡Planifica tu próximo viaje con nosotros y experimenta el mundo como nunca antes!</p>
+      <h1 class="animate__animated animate__rubberBand">Descubramos el Mundo
+        Juntos</h1>
+      <p>¡Planifica tu próximo viaje con nosotros y experimenta el mundo como
+        nunca antes!</p>
       <button id="buscar-btn"
-              class="btn btn-primary btn-lg mt-3 animate__animated animate__shakeX">Reservar Ahora</button>
+              class="btn btn-primary btn-lg mt-3 animate__animated animate__shakeX">
+        Reservar Ahora
+      </button>
 
       <!-- Barra de búsqueda -->
       <div class="search-bar mt-4 d-flex justify-content-center">
-        <input type="text" class="form-control mx-2" placeholder="Destino">
+
+        <input type="text" placeholder="Origen"
+               class="form-control mx-2" [(ngModel)]="origin" [ngbTypeahead]="search" />
+
+
+        <input type="text" placeholder="Destino"
+               class="form-control mx-2" [(ngModel)]="destiny" [ngbTypeahead]="search" />
         <input type="date" class="form-control mx-2">
         <input type="date" class="form-control mx-2">
         <button class="btn btn-secondary">Buscar</button>

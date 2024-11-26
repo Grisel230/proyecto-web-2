@@ -63,7 +63,7 @@
   background: linear-gradient(90deg, #ff5722, #ff9800);
 }
 
-#buscar-btn:hover{
+#buscar-btn:hover {
   animation: bounce;
   animation-duration: 0.5;
 }

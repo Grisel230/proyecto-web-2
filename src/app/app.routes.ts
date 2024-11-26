@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {RutasComponent} from "./admin/rutas/rutas.component";
@@ -14,14 +14,14 @@ import {
 import {LandingPageComponent} from "./landing-page/landing-page.component";
 
 export const routes: Routes = [
-  { path: 'auth/login', component: LoginComponent },
-  { path: 'auth/register', component: RegisterComponent },
-  { path: 'admin/rutas', component: RutasComponent },
-  { path: 'admin/autobuses', component: AutobusesComponent },
-  { path: 'admin/conductores', component: ConductoresComponent },
-  { path: 'admin/reportes', component: ReportesComponent },
-  { path: 'passenger/compra-boletos', component: CompraBoletosComponent },
-  { path: 'passenger/verificacion', component: VerificacionComponent },
-  { path: '', component: LandingPageComponent},
-  { path: '**', redirectTo: '/' },
+  {path: 'auth/login', component: LoginComponent},
+  {path: 'auth/register', component: RegisterComponent},
+  {path: 'admin/rutas', component: RutasComponent},
+  {path: 'admin/autobuses', component: AutobusesComponent},
+  {path: 'admin/conductores', component: ConductoresComponent},
+  {path: 'admin/reportes', component: ReportesComponent},
+  {path: 'passenger/compra-boletos', component: CompraBoletosComponent},
+  {path: 'passenger/verificacion', component: VerificacionComponent},
+  {path: '', component: LandingPageComponent},
+  {path: '**', redirectTo: '/'},
 ];
