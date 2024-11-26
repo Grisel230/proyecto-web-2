@@ -11,6 +11,7 @@ import {
 import {
   VerificacionComponent
 } from "./passenger/verificacion/verificacion.component";
+import {LandingPageComponent} from "./landing-page/landing-page.component";
 
 export const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
@@ -21,6 +22,6 @@ export const routes: Routes = [
   { path: 'admin/reportes', component: ReportesComponent },
   { path: 'passenger/compra-boletos', component: CompraBoletosComponent },
   { path: 'passenger/verificacion', component: VerificacionComponent },
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/auth/login' },
+  { path: '', component: LandingPageComponent},
+  { path: '**', redirectTo: '/' },
 ];
