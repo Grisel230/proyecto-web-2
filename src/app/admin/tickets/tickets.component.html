@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <h3 class="mb-4">Gestión de Tickets (Solo Lectura)</h3>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Viaje</th>
+      <th>Asiento</th>
+      <th>Usuario</th>
+      <th>Precio</th>
+      <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ticket of tickets">
+      <td>{{ ticket.id }}</td>
+      <td>{{ ticket.Viaje.Ruta.OrigenCiudad.nombre }} → {{ ticket.Viaje.Ruta.DestinoCiudad.nombre }}</td>
+      <td>{{ ticket.seat_number }}</td>
+      <td>{{ ticket.Usuario.name }} ({{ ticket.Usuario.email }})</td>
+      <td>${{ ticket.price }}</td>
+      <td>{{ getStatus(ticket.status) }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

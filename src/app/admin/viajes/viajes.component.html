@@ -1,0 +1,161 @@
+<div class="container mt-5">
+  <h3 class="mb-4">Gestión de Viajes</h3>
+  <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addViajeModal">Añadir Viaje</button>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ruta</th>
+      <th>Vehículo</th>
+      <th>Conductor</th>
+      <th>Fecha de Salida</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let viaje of viajes">
+      <td>{{ viaje.id }}</td>
+      <td>{{ viaje.Ruta.OrigenCiudad.nombre }} → {{ viaje.Ruta.DestinoCiudad.nombre }}</td>
+      <td>{{ viaje.Vehiculo.placa }}</td>
+      <td>{{ viaje.Conductor.nombre }}</td>
+      <td>{{ viaje.fecha_salida | date }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="openEditModal(viaje)" data-bs-toggle="modal" data-bs-target="#editViajeModal">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="openDeleteModal(viaje.id)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal para Agregar Viaje -->
+<div class="modal fade" id="addViajeModal" tabindex="-1" aria-labelledby="addViajeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addViajeModalLabel">Añadir Viaje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="ruta" class="form-label">Ruta</label>
+            <select id="ruta" class="form-control" [(ngModel)]="newViaje.id_ruta" name="ruta">
+              <option *ngFor="let ruta of rutas" [value]="ruta.id">
+                {{ ruta.OrigenCiudad.nombre }} → {{ ruta.DestinoCiudad.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="vehiculo" class="form-label">Vehículo</label>
+            <select id="vehiculo" class="form-control" [(ngModel)]="newViaje.id_vehiculo" name="vehiculo">
+              <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.id">
+                {{ vehiculo.placa }} ({{ vehiculo.capacidad }} asientos)
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="conductor" class="form-label">Conductor</label>
+            <select id="conductor" class="form-control" [(ngModel)]="newViaje.id_conductor" name="conductor">
+              <option *ngFor="let conductor of conductores" [value]="conductor.id">
+                {{ conductor.nombre }} {{ conductor.apellido }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="horaSalida" class="form-label">Hora de Salida</label>
+            <input type="time" id="horaSalida" class="form-control" [(ngModel)]="newViaje.hora_salida" name="horaSalida">
+          </div>
+          <div class="mb-3">
+            <label for="fechaSalida" class="form-label">Fecha de Salida</label>
+            <input type="date" id="fechaSalida" class="form-control" [(ngModel)]="newViaje.fecha_salida" name="fechaSalida">
+          </div>
+          <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" id="precio" class="form-control" [(ngModel)]="newViaje.precio" name="precio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addViaje()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Editar Viaje -->
+<div class="modal fade" id="editViajeModal" tabindex="-1" aria-labelledby="editViajeModalLabel" aria-hidden="true" (click)="closeModal()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editViajeModalLabel">Editar Viaje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="editRuta" class="form-label">Ruta</label>
+            <select id="editRuta" class="form-control" [(ngModel)]="selectedViaje.id_ruta" name="editRuta">
+              <option *ngFor="let ruta of rutas" [value]="ruta.id">
+                {{ ruta.OrigenCiudad.nombre }} → {{ ruta.DestinoCiudad.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editVehiculo" class="form-label">Vehículo</label>
+            <select id="editVehiculo" class="form-control" [(ngModel)]="selectedViaje.id_vehiculo" name="editVehiculo">
+              <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.id">
+                {{ vehiculo.placa }} ({{ vehiculo.capacidad }} asientos)
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editConductor" class="form-label">Conductor</label>
+            <select id="editConductor" class="form-control" [(ngModel)]="selectedViaje.id_conductor" name="editConductor">
+              <option *ngFor="let conductor of conductores" [value]="conductor.id">
+                {{ conductor.nombre }} {{ conductor.apellido }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="horaSalida" class="form-label">Hora de Salida</label>
+            <input type="time" id="horaSalida" class="form-control" [(ngModel)]="newViaje.hora_salida" name="horaSalida">
+          </div>
+          <div class="mb-3">
+            <label for="editFechaSalida" class="form-label">Fecha de Salida</label>
+            <input type="date" id="editFechaSalida" class="form-control" [(ngModel)]="selectedViaje.fecha_salida" name="editFechaSalida">
+          </div>
+          <div class="mb-3">
+            <label for="editPrecio" class="form-label">Precio</label>
+            <input type="number" id="editPrecio" class="form-control" [(ngModel)]="selectedViaje.precio" name="editPrecio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateViaje()" data-bs-dismiss="modal">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación para Eliminación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este viaje?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()" data-bs-dismiss="modal">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,18 +13,7 @@
         Reservar Ahora
       </button>
 
-      <div class="search-bar mt-4 d-flex justify-content-center">
-
-        <input type="text" placeholder="Origen"
-               class="form-control mx-2" [(ngModel)]="origin" [ngbTypeahead]="search" />
-
-
-        <input type="text" placeholder="Destino"
-               class="form-control mx-2" [(ngModel)]="destiny" [ngbTypeahead]="search" />
-        <input type="date" class="form-control mx-2">
-        <input type="date" class="form-control mx-2">
-        <button class="btn btn-secondary">Buscar</button>
-      </div>
+        <app-trip-search></app-trip-search>
     </div>
   </div>
 
@@ -73,3 +62,4 @@
       </div>
     </div>
   </div>
+</div>

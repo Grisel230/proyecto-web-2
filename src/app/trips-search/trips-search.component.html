@@ -1,0 +1,58 @@
+
+<div class="search-bar my-4 d-flex justify-content-center">
+  <select class="form-control mx-2" [(ngModel)]="selectedRouteId">
+    <option value="" disabled selected>Selecciona una ruta</option>
+    <option *ngFor="let route of routes" [value]="route.id">
+      {{ route.OrigenCiudad.nombre }} → {{ route.DestinoCiudad.nombre }}
+    </option>
+  </select>
+  <input type="date" class="form-control mx-2" [(ngModel)]="startDate">
+  <input type="date" class="form-control mx-2" [(ngModel)]="endDate">
+  <button class="btn btn-secondary" (click)="searchTrips()">Buscar</button>
+</div>
+
+<div *ngIf="trips.length > 0" class="results my-8 scrollable">
+  <h5>Resultados de búsqueda:</h5>
+  <div *ngFor="let trip of trips" class="card my-2">
+    <div class="card-body">
+      <h6>Ruta: {{ trip.Ruta.OrigenCiudad.nombre }} → {{ trip.Ruta.DestinoCiudad.nombre }}</h6>
+      <p>Fecha de salida: {{ trip.fecha_salida | date }}</p>
+      <p>Vehículo: {{ trip.Vehiculo.placa }} ({{ trip.Vehiculo.capacidad }} asientos)</p>
+      <p>Conductor: {{ trip.Conductor.nombre }} {{ trip.Conductor.apellido }}</p>
+      <button class="btn btn-primary" (click)="showDetails(trip)">Ver detalles</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="trips.length === 0" class="mt-4">
+  <p>No se encontraron viajes. Intenta con otros criterios.</p>
+</div>
+
+<div class="modal fade" id="tripDetailsModal" tabindex="-1" aria-labelledby="tripDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tripDetailsModalLabel">Detalles del viaje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Ruta:</strong> {{ selectedTrip?.Ruta.OrigenCiudad.nombre }} → {{ selectedTrip?.Ruta.DestinoCiudad.nombre }}</p>
+        <p><strong>Fecha de salida:</strong> {{ selectedTrip?.fecha_salida | date }}</p>
+        <p><strong>Vehículo:</strong> {{ selectedTrip?.Vehiculo.placa }} ({{ selectedTrip?.Vehiculo.capacidad }} asientos)</p>
+        <p><strong>Conductor:</strong> {{ selectedTrip?.Conductor.nombre }} {{ selectedTrip?.Conductor.apellido }}</p>
+
+        <h6>Selecciona un asiento:</h6>
+        <div>
+          <label for="seat">Asientos disponibles:</label>
+          <select id="seat" class="form-control" [(ngModel)]="selectedSeat">
+            <option *ngFor="let seat of availableSeats" [value]="seat">{{ seat }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="reserveSeat()">Reservar Asiento</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

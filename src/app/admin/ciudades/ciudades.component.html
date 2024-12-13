@@ -1,0 +1,91 @@
+<div class="container mt-5">
+  <h3 class="mb-4">Gestión de Ciudades</h3>
+  <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addCiudadModal">Añadir Ciudad</button>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ciudad of ciudades">
+      <td>{{ ciudad.id }}</td>
+      <td>{{ ciudad.nombre }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="openEditModal(ciudad)" data-bs-toggle="modal" data-bs-target="#editCiudadModal">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="openDeleteModal(ciudad.id)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal de Agregar Ciudad -->
+<div class="modal fade" id="addCiudadModal" tabindex="-1" aria-labelledby="addCiudadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCiudadModalLabel">Añadir Ciudad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nombreCiudad" class="form-label">Nombre</label>
+            <input type="text" id="nombreCiudad" class="form-control" [(ngModel)]="newCiudad.nombre" name="nombreCiudad">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addCiudad()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Editar Ciudad -->
+<div class="modal fade" id="editCiudadModal" tabindex="-1" aria-labelledby="editCiudadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCiudadModalLabel">Editar Ciudad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="editNombreCiudad" class="form-label">Nombre</label>
+            <input type="text" id="editNombreCiudad" class="form-control" [(ngModel)]="selectedCiudad.nombre" name="editNombreCiudad">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateCiudad()" data-bs-dismiss="modal">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación para Eliminación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar esta ciudad?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()" data-bs-dismiss="modal">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

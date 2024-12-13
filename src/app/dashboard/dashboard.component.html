@@ -1,0 +1,19 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="bg-light border-end" id="sidebar-wrapper">
+    <div class="sidebar-heading text-center py-4">Admin Panel</div>
+    <div class="list-group list-group-flush">
+      <a routerLink="/admin/rutas" class="list-group-item list-group-item-action">Rutas</a>
+      <a routerLink="/admin/viajes" class="list-group-item list-group-item-action">Viajes</a>
+      <a routerLink="/admin/tickets" class="list-group-item list-group-item-action">Boletoss</a>
+      <a routerLink="/admin/ciudades" class="list-group-item list-group-item-action">Ciudades</a>
+      <a routerLink="/admin/autobuses" class="list-group-item list-group-item-action">Autobuses</a>
+      <a routerLink="/admin/conductores" class="list-group-item list-group-item-action">Conductores</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container-fluid p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

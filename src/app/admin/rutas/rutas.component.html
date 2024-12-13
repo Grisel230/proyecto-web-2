@@ -1,1 +1,119 @@
-<p>rutas works!</p>
+<div class="container mt-5">
+  <h3 class="mb-4">Gestión de Rutas</h3>
+  <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addRutaModal">Añadir Ruta</button>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Origen</th>
+      <th>Destino</th>
+      <th>Distancia (km)</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ruta of rutas">
+      <td>{{ ruta.id }}</td>
+      <td>{{ ruta.OrigenCiudad.nombre }}</td>
+      <td>{{ ruta.DestinoCiudad.nombre }}</td>
+      <td>{{ ruta.distancia }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="openEditModal(ruta)" data-bs-toggle="modal" data-bs-target="#editRutaModal">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="openDeleteModal(ruta.id)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal para Agregar Ruta -->
+<div class="modal fade" id="addRutaModal" tabindex="-1" aria-labelledby="addRutaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRutaModalLabel">Añadir Ruta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="origen" class="form-label">Origen</label>
+            <select id="origen" class="form-control" [(ngModel)]="newRuta.origen" name="origen">
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="destino" class="form-label">Destino</label>
+            <select id="destino" class="form-control" [(ngModel)]="newRuta.destino" name="destino">
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="distancia" class="form-label">Distancia (km)</label>
+            <input type="number" id="distancia" class="form-control" [(ngModel)]="newRuta.distancia" name="distancia">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addRuta()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Editar Ruta -->
+<div class="modal fade" id="editRutaModal" tabindex="-1" aria-labelledby="editRutaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRutaModalLabel">Editar Ruta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="editOrigen" class="form-label">Origen</label>
+            <select id="editOrigen" class="form-control" [(ngModel)]="selectedRuta.origen" name="editOrigen">
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editDestino" class="form-label">Destino</label>
+            <select id="editDestino" class="form-control" [(ngModel)]="selectedRuta.destino" name="editDestino">
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editDistancia" class="form-label">Distancia (km)</label>
+            <input type="number" id="editDistancia" class="form-control" [(ngModel)]="selectedRuta.distancia" name="editDistancia">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateRuta()" data-bs-dismiss="modal">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación para Eliminación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar esta ruta?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()" data-bs-dismiss="modal">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

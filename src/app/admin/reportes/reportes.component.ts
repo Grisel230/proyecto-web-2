@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-reportes',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css'
 })

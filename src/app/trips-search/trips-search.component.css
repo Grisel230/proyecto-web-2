@@ -1,0 +1,31 @@
+
+.modal-content {
+  border-radius: 8px;
+
+  color: black;
+}
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  color: black;
+}
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+}
+#tripDetailsModal {
+  z-index: 1055; /* Bootstrap modal default is 1050, make it higher */
+}
+
+.modal-backdrop {
+  z-index: 1050; /* Asegúrate de que el fondo tenga un z-index más bajo que el modal */
+}
+
+
+.scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+

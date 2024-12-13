@@ -1,0 +1,7 @@
+.modal {
+  z-index: 1055 !important; /* Fuerza un z-index más alto */
+}
+
+.modal-backdrop {
+  z-index: 1050 !important; /* El fondo debe estar debajo del modal */
+}

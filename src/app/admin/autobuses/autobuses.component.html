@@ -1,1 +1,111 @@
-<p>autobuses works!</p>
+<div class="container mt-5">
+  <h3 class="mb-4">Gestión de Autobuses</h3>
+  <!-- Botón para abrir el modal de agregar -->
+  <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addBusModal">Añadir Autobús</button>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Placa</th>
+      <th>Capacidad</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let autobus of autobuses">
+      <td>{{ autobus.id }}</td>
+      <td>{{ autobus.placa }}</td>
+      <td>{{ autobus.capacidad }}</td>
+      <td>
+        <!-- Botón para abrir el modal de edición -->
+        <button
+          class="btn btn-primary btn-sm"
+          (click)="openEditModal(autobus)"
+          data-bs-toggle="modal"
+          data-bs-target="#editBusModal">
+          Editar
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="openDeleteModal(autobus.id)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal para Agregar Autobús -->
+<div class="modal fade" id="addBusModal" tabindex="-1" aria-labelledby="addBusModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addBusModalLabel">Añadir Autobús</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="addPlaca" class="form-label">Placa</label>
+            <input type="text" id="addPlaca" class="form-control" [(ngModel)]="newBus.placa" name="addPlaca">
+          </div>
+          <div class="mb-3">
+            <label for="addCapacidad" class="form-label">Capacidad</label>
+            <input type="number" id="addCapacidad" class="form-control" [(ngModel)]="newBus.capacidad" name="addCapacidad">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addBus()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Editar Autobús -->
+<div class="modal fade" id="editBusModal" tabindex="-1" aria-labelledby="editBusModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editBusModalLabel">Editar Autobús</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="editPlaca" class="form-label">Placa</label>
+            <input type="text" id="editPlaca" class="form-control" [(ngModel)]="selectedBus.placa" name="editPlaca">
+          </div>
+          <div class="mb-3">
+            <label for="editCapacidad" class="form-label">Capacidad</label>
+            <input type="number" id="editCapacidad" class="form-control" [(ngModel)]="selectedBus.capacidad" name="editCapacidad">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateBus()" data-bs-dismiss="modal">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este autobús?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()" data-bs-dismiss="modal">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
